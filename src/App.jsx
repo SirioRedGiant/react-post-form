@@ -53,18 +53,19 @@ export default function App() {
         console.error("Errore durante l'invio:", err);
       });
   };
-   return (
-    <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-  <label class="form-check-label" for="flexCheckChecked">
-    Checked checkbox
-  </label>
-</div>
-   )
+  return (
+    <div className="form-check mb-3">
+      <input
+        type="checkbox"
+        name="public" // --> chiave di initialForm
+        className="form-check-input"
+        id="publicCheck" // --> collega la label
+        checked={formData.public} // --> RICORDA: nelle checkbox si usa "checked", non "value"
+        onChange={handleInputChange}
+      />
+      <label className="form-check-label" htmlFor="publicCheck">
+        Rendi il post pubblico
+      </label>
+    </div>
+  );
 }
