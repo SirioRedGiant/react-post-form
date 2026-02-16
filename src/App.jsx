@@ -14,7 +14,7 @@ const initialForm = {
 
 export default function App() {
   // lo stato che contiene i dati del form mentre l'utente scrive
-  const [formData, detFormData] = useState(initialForm);
+  const [formData, setFormData] = useState(initialForm);
 
   //note --> FUNZIONE UNIVERSALE DEGLI INPUT
   const handleInputChange = (e) => {
@@ -22,7 +22,7 @@ export default function App() {
     //*   Usiamo il "destructuring" per estrarre le proprietà che ci servono
     const { name, value, type, checked } = e.target;
 
-    //note --> Aggiora lo stato in modo dinamico
+    //note --> Aggiorna lo stato in modo dinamico
     setFormData({
       ...formData, //  Copio l'oggetto attuale per non perdere gli altri campi
       //   [name] per identificare quale chiave dell' array aggiornare
@@ -54,6 +54,80 @@ export default function App() {
       });
   };
   return (
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6 card shadow p-4">
+          <h2 className="mb-4 text-center">Post Manager</h2>
+
+          {/* Colleghiamo la funzione handleSubmit al form */}
+          <form onSubmit={handleSubmit}>
+            {/* CAMPO AUTORE */}
+            <div className="mb-3">
+              <label className="form-label fw-bold">Autore</label>
+              <input
+                type="text"
+                name="author" // <---  chiave nell'oggetto
+                className="form-control"
+                value={formData.author}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            {/* CAMPO TITOLO */}
+            <div className="mb-3">
+              <label className="form-label fw-bold">Titolo</label>
+              <input
+                type="text"
+                name="title" // <---  chiave nell'oggetto
+                className="form-control"
+                value={formData.title}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            {/* CAMPO CONTENUTO (Body) */}
+            <div className="mb-3">
+              <label className="form-label fw-bold">Testo del Post</label>
+              <textarea
+                name="body" // <---  chiave nell'oggetto
+                className="form-control"
+                rows="4"
+                value={formData.body}
+                onChange={handleInputChange}
+                required
+              ></textarea>
+            </div>
+
+            {/* LA TUA CHECKBOX (Sistemata) */}
+            <div className="form-check mb-3">
+              <input
+                type="checkbox"
+                name="public" // --> chiave di initialForm
+                className="form-check-input"
+                id="publicCheck" // --> collega la label
+                checked={formData.public} // --> RICORDA: nelle checkbox si usa "checked", non "value"
+                onChange={handleInputChange}
+              />
+              <label className="form-check-label" htmlFor="publicCheck">
+                Rendi il post pubblico
+              </label>
+            </div>
+
+            {/* PULSANTE DI INVIO */}
+            <button type="submit" className="btn btn-primary w-100">
+              Pubblica Post
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/*
+return (
     <div className="form-check mb-3">
       <input
         type="checkbox"
@@ -68,4 +142,4 @@ export default function App() {
       </label>
     </div>
   );
-}
+  */
