@@ -15,6 +15,7 @@ const initialForm = {
 export default function App() {
   // lo stato che contiene i dati del form mentre l'utente scrive
   const [formData, setFormData] = useState(initialForm);
+  const [alert, setAlert] = useState({ message: "", type: "" }); //^  creo uno stato per gestire alert --> per avvisare l'utente di successo, fallimento del post
 
   //note --> FUNZIONE UNIVERSALE DEGLI INPUT
   const handleInputChange = (e) => {
@@ -35,7 +36,7 @@ export default function App() {
   const handleSubmit = (e) => {
     e.preventDefault(); // Previene il refresh della pagina
 
-    const url = "https://**67c5b4f3351c081993fb1ab6**.mockapi.io**/api**/posts";
+    const url = "https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts";
 
     // Invia i dati al server (POST)
     // Passa l'oggetto "formData" scritto nel form
