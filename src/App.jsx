@@ -45,13 +45,19 @@ export default function App() {
       .then((res) => {
         // Se il server risponde stampa il risultato in console
         console.log("Dati inviati con successo:", res.data);
-        alert("Post creato!");
+        //^ ALERT --> POST AVVENUTO // message -> messaggio , type -> colore
+        setAlert({ message: "Post inviato!", type: "success" });
 
         // riporta il form allo stato iniziale --> se ha successo
         setFormData(initialForm);
       })
       .catch((err) => {
         console.error("Errore durante l'invio:", err);
+        //^ ALERT --> POST NON AVVENUTO(errore)
+        setAlert({
+          message: "Post non inviato a causa di un errore!",
+          type: "danger",
+        });
       });
   };
   return (
@@ -88,7 +94,7 @@ export default function App() {
               />
             </div>
 
-            {/* CAMPO CONTENUTO (Body) */}
+            {/* CONTENUTO (Body) */}
             <div className="mb-3">
               <label className="form-label fw-bold">Testo del Post</label>
               <textarea
@@ -101,7 +107,7 @@ export default function App() {
               ></textarea>
             </div>
 
-            {/* LA TUA CHECKBOX (Sistemata) */}
+            {/* CHECKBOX  */}
             <div className="form-check mb-3">
               <input
                 type="checkbox"
@@ -120,6 +126,22 @@ export default function App() {
             <button type="submit" className="btn btn-primary w-100">
               Pubblica Post
             </button>
+            {/* --- LOGICA DI VISUALIZZAZIONE ALERT --- */}
+            {/* Se alert.message non è vuoto, allora mostra il div */}
+            {alert.message && (
+              <div
+                className={`alert alert-${alert.type} alert-dismissible fade show`}
+                role="alert"
+              >
+                {alert.message}
+                {/* Bottone per chiudere l'alert*/}
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setAlert({ message: "", type: "" })}
+                ></button>
+              </div>
+            )}
           </form>
         </div>
       </div>
