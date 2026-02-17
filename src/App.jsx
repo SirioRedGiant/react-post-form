@@ -50,6 +50,11 @@ export default function App() {
 
         // riporta il form allo stato iniziale --> se ha successo
         setFormData(initialForm);
+
+        // dopo 6 secondi faccio scomparire l'alert
+        setTimeout(() => {
+          setAlert({ message: "", type: "" });
+        }, 6000);
       })
       .catch((err) => {
         console.error("Errore durante l'invio:", err);
